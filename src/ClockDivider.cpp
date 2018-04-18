@@ -78,13 +78,13 @@ ClockDivider::ClockDivider() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_L
 	params.resize(NUM_PARAMS);
 	inputs.resize(NUM_INPUTS);
 	outputs.resize(NUM_OUTPUTS);
-	trigger2.setThresholds(0.0, 1.0);
-	trigger4.setThresholds(0.0, 1.0);
-	trigger8.setThresholds(0.0, 1.0);
-	trigger16.setThresholds(0.0, 1.0);
-	trigger32.setThresholds(0.0, 1.0);
+	// trigger2.setThresholds(0.0, 1.0);
+	// trigger4.setThresholds(0.0, 1.0);
+	// trigger8.setThresholds(0.0, 1.0);
+	// trigger16.setThresholds(0.0, 1.0);
+	// trigger32.setThresholds(0.0, 1.0);
 
-	reset_trig.setThresholds(0.0, 1.0);
+	// reset_trig.setThresholds(0.0, 1.0);
 
 }
 
@@ -315,19 +315,10 @@ if (blinkPhase >= 1.0)
 	}
 }
 
-
-ClockDividerWidget::ClockDividerWidget() {
-	ClockDivider *module = new ClockDivider();
-	setModule(module);
-	box.size = Vec(4 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT);
-
-	{
-		SVGPanel *panel = new SVGPanel();
-		panel->box.size = box.size;
-		panel->setBackground(SVG::load(assetPlugin(plugin, "res/ClockDivider.svg")));
-		
-		addChild(panel);
-	}
+struct ClockDividerWidget : ModuleWidget
+{
+	ClockDividerWidget(ClockDivider *module) : ModuleWidget(module) {
+	setPanel(SVG::load(assetPlugin(plugin, "res/ClockDivider.svg")));
 
 	addChild(createScrew<ScrewSilver>(Vec(1, 0)));
 	addChild(createScrew<ScrewSilver>(Vec(1, 365)));
@@ -351,3 +342,6 @@ ClockDividerWidget::ClockDividerWidget() {
 	addChild(createLight<SmallLight<RedLight>>(Vec(38, 285), module, ClockDivider::LIGHT5));
 
 }
+};
+
+Model *modelClockDivider = Model::create<ClockDivider, ClockDividerWidget>("Autodafe",  "Clock Divider", "Clock Divider", UTILITY_TAG);

@@ -1,9 +1,12 @@
+RACK_DIR ?= ../..
+SLUG = autodafe
+VERSION = 0.6.0
 
 SOURCES = $(wildcard src/*.cpp)
 
-LDFLAGS += -Lsrc/stk/src -lstk
+//LDFLAGS += -Lsrc/stk/src -lstk
 
-LDFLAGS += -Lsrc/Gamma/build/lib -lGamma
+//LDFLAGS += -Lsrc/Gamma/build/lib -lGamma
 
 
 include ../../plugin.mk

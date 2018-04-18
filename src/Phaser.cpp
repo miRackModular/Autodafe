@@ -195,19 +195,10 @@ void PhaserFx::step() {
 
 
  
-    
-PhaserFxWidget::PhaserFxWidget() {
-	PhaserFx *module = new PhaserFx();
-	setModule(module);
-	box.size = Vec(15 * 6, 380);
-
-	{
-		SVGPanel *panel = new SVGPanel();
-		panel->box.size = box.size;
-		
-        panel->setBackground(SVG::load(assetPlugin(plugin, "res/Phaser.svg")));
-		addChild(panel); 
-	}
+struct PhaserFxWidget : ModuleWidget
+{
+    PhaserFxWidget(PhaserFx *module) : ModuleWidget(module) {
+	setPanel(SVG::load(assetPlugin(plugin, "res/Phaser.svg")));
 
 	addChild(createScrew<ScrewSilver>(Vec(1, 0)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x - 20, 0)));
@@ -227,3 +218,6 @@ PhaserFxWidget::PhaserFxWidget() {
 	addOutput(createOutput<PJ301MPort>(Vec(48, 320), module, PhaserFx::OUT));
  
 }
+};
+
+Model *modelPhaser = Model::create<PhaserFx, PhaserFxWidget>("Autodafe",  "Phaser", "Phaser", EFFECT_TAG);

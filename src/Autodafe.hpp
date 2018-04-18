@@ -330,31 +330,6 @@ struct BlackKey : SVGSwitch, MomentarySwitch {
 
 
 
-struct LFOWidget : ModuleWidget {
-	LFOWidget();
-};
-
-
-struct BPMClockWidget : ModuleWidget {
-	BPMClockWidget();
-};
-
-
-struct Multiple28Widget : ModuleWidget  {
-	Multiple28Widget();
-};
-
-
-struct Multiple18Widget : ModuleWidget  {
-	Multiple18Widget();
-};
-
-
-struct ClockDividerWidget : ModuleWidget {
-	ClockDividerWidget();
-};
-
-
 
 struct SEQ16Widget : ModuleWidget{
 	SEQ16Widget();
@@ -362,151 +337,11 @@ struct SEQ16Widget : ModuleWidget{
 	
 };
 
-struct TriggerSeqWidget : ModuleWidget{
-	TriggerSeqWidget();
-	
-};
-
-
-struct FoldBackWidget : ModuleWidget{
-	FoldBackWidget();
-};
-
-struct BitCrusherWidget : ModuleWidget{
-	BitCrusherWidget();
-};
-
-
-
-
-
-struct SEQ8Widget : ModuleWidget{
-	SEQ8Widget();
-	Menu *createContextMenu() override;
-	
-};
-
-
-
-
-
-
-
-struct FormantFilterWidget : ModuleWidget{
-	FormantFilterWidget();
-};
-
-struct MultiModeFilterWidget : ModuleWidget{
-	MultiModeFilterWidget();
-};
-struct FixedFilterWidget : ModuleWidget{
-	FixedFilterWidget();
-};
-
-
-
-
 
 
 
 //// EFFECTS
 
-struct PhaserFxWidget : ModuleWidget{
-	PhaserFxWidget();
-};
-
-
-struct ChorusFxWidget : ModuleWidget{
-	ChorusFxWidget();
-};
-
-
-struct FlangerFxWidget : ModuleWidget{
-	FlangerFxWidget();
-};
-
-
-struct EchoFxWidget : ModuleWidget{
-	EchoFxWidget();
-};
-
-struct ReverbFxWidget : ModuleWidget{
-	ReverbFxWidget();
-};
-
-
-struct PitchShifterFxWidget : ModuleWidget{
-	PitchShifterFxWidget();
-};
-
-
-
-struct CompressorWidget : ModuleWidget{
-	CompressorWidget();
-};
-
-
-
-struct KnobDemoWidget : ModuleWidget{
-	KnobDemoWidget();
-};
-
-
-
-
-
-
-
-
-
-
-
-
-///OSCILLATORS
-
-struct WavesModelWidget : ModuleWidget{
-	WavesModelWidget();
-};
-
-
-
-struct SquareVCOModelWidget : ModuleWidget{
-	SquareVCOModelWidget();
-};
-
-
-
-struct AMVCOModelWidget : ModuleWidget{
-	AMVCOModelWidget();
-};
-
-
-struct FMVCOModelWidget : ModuleWidget{
-	FMVCOModelWidget();
-};
-
-
-struct CosineVCOModelWidget : ModuleWidget{
-	CosineVCOModelWidget();
-};
-
-
-
-struct OPERATORModelWidget : ModuleWidget{
-	OPERATORModelWidget();
-};
-
-
-struct DWOVCOModelWidget : ModuleWidget{
-	DWOVCOModelWidget();
-};
-
-
-
-
-struct SamplerModelWidget : ModuleWidget{
-	SamplerModelWidget();
-};
 struct DrumSamplerWidget : ModuleWidget{
 	DrumSamplerWidget();
 	Menu *createContextMenu() override;
@@ -515,17 +350,6 @@ struct DrumSamplerWidget : ModuleWidget{
 
 
 
-
-
-
-
-
-
-
-
-struct KeyboardModelWidget : ModuleWidget{
-	KeyboardModelWidget();
-};
 
 
 
