@@ -1,5 +1,5 @@
 RACK_DIR ?= ../..
-SLUG = autodafe
+SLUG = Autodafe
 VERSION = 0.6.0
 
 SOURCES = $(wildcard src/*.cpp)
