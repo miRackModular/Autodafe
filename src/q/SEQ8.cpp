@@ -185,7 +185,7 @@ void SEQ8::step() {
 			index = 0;
 		}
 		stepLights[index] = 1.0;
-		gatePulse.trigger(1e-3);
+		gatePulse.trigger();
 
 	}
 

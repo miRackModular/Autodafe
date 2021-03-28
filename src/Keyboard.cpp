@@ -356,54 +356,55 @@ struct OctaveDisplay : TransparentWidget {
 
 
 
-KeyboardModelWidget::KeyboardModelWidget() {
-	KeyboardModel *module = new KeyboardModel();
-	setModule(module);
-	setPanel(SVG::load(assetPlugin(plugin, "res/Keyboard.svg")));
-
-
+struct KeyboardModelWidget : ModuleWidget
 {
-    OctaveDisplay *octavedisplay = new OctaveDisplay();
-    octavedisplay->box.pos = Vec(25,310);
-    octavedisplay->box.size = Vec(41, 21);
-    octavedisplay->value = &module->octave;
-    addChild(octavedisplay);
-  }
-addParam(createParam<BtnUp>(Vec(40, 297), module, KeyboardModel::BTNUP, 0.0, 1.0, 0.0));
-addParam(createParam<BtnDwn>(Vec(40, 331), module, KeyboardModel::BTNDWN, 0.0, 1.0, 0.0));
-  
-	addChild(createScrew<ScrewSilver>(Vec(1, 0)));
-	addChild(createScrew<ScrewSilver>(Vec(box.size.x - 20, 0)));
-	addChild(createScrew<ScrewSilver>(Vec(1, 365)));
-	addChild(createScrew<ScrewSilver>(Vec(box.size.x - 20, 365)));
+    KeyboardModelWidget(KeyboardModel *module) : ModuleWidget(module) {
+		setPanel(SVG::load(assetPlugin(plugin, "res/Keyboard.svg")));
 
 
-	
+	{
+	    OctaveDisplay *octavedisplay = new OctaveDisplay();
+	    octavedisplay->box.pos = Vec(25,310);
+	    octavedisplay->box.size = Vec(41, 21);
+	    octavedisplay->value = &module->octave;
+	    addChild(octavedisplay);
+	  }
+	addParam(createParam<BtnUp>(Vec(40, 297), module, KeyboardModel::BTNUP, 0.0, 1.0, 0.0));
+	addParam(createParam<BtnDwn>(Vec(40, 331), module, KeyboardModel::BTNDWN, 0.0, 1.0, 0.0));
+	  
+		addChild(createScrew<ScrewSilver>(Vec(1, 0)));
+		addChild(createScrew<ScrewSilver>(Vec(box.size.x - 20, 0)));
+		addChild(createScrew<ScrewSilver>(Vec(1, 365)));
+		addChild(createScrew<ScrewSilver>(Vec(box.size.x - 20, 365)));
 
 
-	
-  
-addParam(createParam<WhiteKey>(Vec(10, 100), module, KeyboardModel::PARAM_C, 0.0, 1.0, 0.0));
-addParam(createParam<WhiteKey>(Vec(50, 100), module, KeyboardModel::PARAM_D, 0.0, 1.0, 0.0));
-addParam(createParam<WhiteKey>(Vec(90, 100), module, KeyboardModel::PARAM_E, 0.0, 1.0, 0.0));
-addParam(createParam<WhiteKey>(Vec(130, 100), module, KeyboardModel::PARAM_F, 0.0, 1.0, 0.0));
-addParam(createParam<WhiteKey>(Vec(170, 100), module, KeyboardModel::PARAM_G, 0.0, 1.0, 0.0));
-addParam(createParam<WhiteKey>(Vec(210, 100), module, KeyboardModel::PARAM_A, 0.0, 1.0, 0.0));
-addParam(createParam<WhiteKey>(Vec(250, 100), module, KeyboardModel::PARAM_B, 0.0, 1.0, 0.0));
-addParam(createParam<WhiteKey>(Vec(290, 100), module, KeyboardModel::PARAM_C2, 0.0, 1.0, 0.0));
-
-addParam(createParam<BlackKey>(Vec(40, 100), module, KeyboardModel::PARAM_CC, 0.0, 1.0, 0.0));
-addParam(createParam<BlackKey>(Vec(80, 100), module, KeyboardModel::PARAM_DD, 0.0, 1.0, 0.0));
-addParam(createParam<BlackKey>(Vec(160, 100), module, KeyboardModel::PARAM_FF, 0.0, 1.0, 0.0));
-addParam(createParam<BlackKey>(Vec(200, 100), module, KeyboardModel::PARAM_GG, 0.0, 1.0, 0.0));
-addParam(createParam<BlackKey>(Vec(240, 100), module, KeyboardModel::PARAM_AA, 0.0, 1.0, 0.0));
+		
 
 
+		
+	  
+	addParam(createParam<WhiteKey>(Vec(10, 100), module, KeyboardModel::PARAM_C, 0.0, 1.0, 0.0));
+	addParam(createParam<WhiteKey>(Vec(50, 100), module, KeyboardModel::PARAM_D, 0.0, 1.0, 0.0));
+	addParam(createParam<WhiteKey>(Vec(90, 100), module, KeyboardModel::PARAM_E, 0.0, 1.0, 0.0));
+	addParam(createParam<WhiteKey>(Vec(130, 100), module, KeyboardModel::PARAM_F, 0.0, 1.0, 0.0));
+	addParam(createParam<WhiteKey>(Vec(170, 100), module, KeyboardModel::PARAM_G, 0.0, 1.0, 0.0));
+	addParam(createParam<WhiteKey>(Vec(210, 100), module, KeyboardModel::PARAM_A, 0.0, 1.0, 0.0));
+	addParam(createParam<WhiteKey>(Vec(250, 100), module, KeyboardModel::PARAM_B, 0.0, 1.0, 0.0));
+	addParam(createParam<WhiteKey>(Vec(290, 100), module, KeyboardModel::PARAM_C2, 0.0, 1.0, 0.0));
+
+	addParam(createParam<BlackKey>(Vec(40, 100), module, KeyboardModel::PARAM_CC, 0.0, 1.0, 0.0));
+	addParam(createParam<BlackKey>(Vec(80, 100), module, KeyboardModel::PARAM_DD, 0.0, 1.0, 0.0));
+	addParam(createParam<BlackKey>(Vec(160, 100), module, KeyboardModel::PARAM_FF, 0.0, 1.0, 0.0));
+	addParam(createParam<BlackKey>(Vec(200, 100), module, KeyboardModel::PARAM_GG, 0.0, 1.0, 0.0));
+	addParam(createParam<BlackKey>(Vec(240, 100), module, KeyboardModel::PARAM_AA, 0.0, 1.0, 0.0));
 
 
-addOutput(createOutput<PJ301MPort>(Vec(270, 310), module, KeyboardModel::GATE_OUT));
-
-addOutput(createOutput<PJ301MPort>(Vec(300, 310), module, KeyboardModel::CV_OUT));
 
 
+	addOutput(createOutput<PJ301MPort>(Vec(270, 310), module, KeyboardModel::GATE_OUT));
+
+	addOutput(createOutput<PJ301MPort>(Vec(300, 310), module, KeyboardModel::CV_OUT));
 }
+};
+
+Model *modelKeyboard = Model::create<KeyboardModel, KeyboardModelWidget>("Autodafe",  "Keyboard", "Keyboard", UTILITY_TAG);

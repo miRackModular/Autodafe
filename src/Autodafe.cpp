@@ -13,6 +13,7 @@
 
 
 extern Model *modelPhaser;
+extern Model *modelKeyboard;
 extern Model *modelClockDivider;
 
 
@@ -34,8 +35,8 @@ void init(rack::Plugin *p) {
 		//!p->addModel(createModel<Multiple28Widget>("Autodafe",  "Multiple 2x8", "Multiple 2x8", UTILITY_TAG));
 
 		//!p->addModel(createModel<LFOWidget>("Autodafe", "LFO", "LFO", LFO_TAG));
-		//!p->addModel(createModel<KeyboardModelWidget>("Autodafe",  "Keyboard", "Keyboard", UTILITY_TAG));
 		//!p->addModel(createModel<BPMClockWidget>("Autodafe", "BPM Clock", "BPM Clock", UTILITY_TAG, CLOCK_TAG));
+		// p->addModel(modelKeyboard);
 		p->addModel(modelClockDivider);
 	
 		//!p->addModel(createModel<SEQ8Widget>("Autodafe",  "8-Step Sequencer", "8-Step Sequencer", SEQUENCER_TAG));
@@ -55,7 +56,6 @@ void init(rack::Plugin *p) {
 		//p->addModel(createModel<FlangerFxWidget>("Autodafe", "Autodafe", "Flanger", "Flanger"));
 		//->addModel(createModel<EchoFxWidget>("Autodafe", "Autodafe", "Echo", "Echo"));
 		//!p->addModel(createModel<ReverbFxWidget>("Autodafe", "Reverb", "Reverb", EFFECT_TAG, REVERB_TAG));
-		//p->addModel(createModel<PitchShifterFxWidget>("Autodafe", "Autodafe", "Pitch Shifter", "Pitch Shifter"));
 		//p->addModel(createModel<CompressorWidget>("Autodafe",  "Compressor", "Compressor", EFFECT_TAG, DYNAMICS_TAG));
 
 		//p->addModel(createModel<KnobDemoWidget>("Autodafe", "Autodafe", "Demo Knobs", "Demo Knobs"));
@@ -70,8 +70,6 @@ void init(rack::Plugin *p) {
 		
  
 
-		//p->addModel(createModel<SamplerModelWidget>("Autodafe", "Sampler", "Sampler", SAMPLER_TAG));
-		//p->addModel(createModel<DrumSamplerWidget>("Autodafe",  "Drum Sampler", "Drum Sampler", SAMPLER_TAG, DRUM_TAG));
 		
 
 		

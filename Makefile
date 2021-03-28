@@ -9,4 +9,4 @@ SOURCES = $(wildcard src/*.cpp)
 //LDFLAGS += -Lsrc/Gamma/build/lib -lGamma
 
 
-include ../../plugin.mk
+include $(RACK_DIR)/plugin.mk

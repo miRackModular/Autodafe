@@ -11,8 +11,8 @@
 
 
 
-#define SR (44100.f)  //sample rate
-#define F_PI (3.14159f)
+#define SR engineGetSampleRate()
+#define F_PI M_PI
 
 class Phaser{
 public:
@@ -133,7 +133,7 @@ float rate ;
     float out;
 
 
-Phaser *pha = new Phaser();
+    Phaser pha;
 
 
 
@@ -141,6 +141,9 @@ Phaser *pha = new Phaser();
 
 	void step();
 
+    void onSampleRateChange() override {
+        pha.Range( 440.0f, 1600.0f );   
+    }
 
 
 };
@@ -175,11 +178,11 @@ void PhaserFx::step() {
 
 	 input = inputs[INPUT].value / 5.0;
 
-		pha->Rate(rate);
-		pha->Feedback(feedback);
-		pha->Depth (depth);
+		pha.Rate(rate);
+		pha.Feedback(feedback);
+		pha.Depth (depth);
 	
-	 out = pha->Update(input);
+	 out = pha.Update(input);
 
 
 
@@ -198,26 +201,25 @@ void PhaserFx::step() {
 struct PhaserFxWidget : ModuleWidget
 {
     PhaserFxWidget(PhaserFx *module) : ModuleWidget(module) {
-	setPanel(SVG::load(assetPlugin(plugin, "res/Phaser.svg")));
+    	setPanel(SVG::load(assetPlugin(plugin, "res/Phaser.svg")));
 
-	addChild(createScrew<ScrewSilver>(Vec(1, 0)));
-	addChild(createScrew<ScrewSilver>(Vec(box.size.x - 20, 0)));
-	addChild(createScrew<ScrewSilver>(Vec(1, 365)));
-	addChild(createScrew<ScrewSilver>(Vec(box.size.x - 20, 365)));
-      
-	addParam(createParam<AutodafeKnobGreen>(Vec(25, 51), module, PhaserFx::PARAM_RATE, 0, 1, 0));
-    //addParam(createParam<AutodafeKnob>(Vec(25, 51), module, PhaserFx::PARAM_RATE, 0, 1, 0));
+    	addChild(createScrew<ScrewSilver>(Vec(1, 0)));
+    	addChild(createScrew<ScrewSilver>(Vec(box.size.x - 20, 0)));
+    	addChild(createScrew<ScrewSilver>(Vec(1, 365)));
+    	addChild(createScrew<ScrewSilver>(Vec(box.size.x - 20, 365)));
+          
+    	addParam(createParam<AutodafeKnobGreen>(Vec(25, 51), module, PhaserFx::PARAM_RATE, 0, 1, 0));
+        //addParam(createParam<AutodafeKnob>(Vec(25, 51), module, PhaserFx::PARAM_RATE, 0, 1, 0));
 
-	addParam(createParam<AutodafeKnobGreen>(Vec(25, 111), module, PhaserFx::PARAM_FEEDBACK, 0, 0.95, 0));
-    //addParam(createParam<AutodafeKnob>(Vec(25, 111), module, PhaserFx::PARAM_FEEDBACK, 0, 0.95, 0));
+    	addParam(createParam<AutodafeKnobGreen>(Vec(25, 111), module, PhaserFx::PARAM_FEEDBACK, 0, 0.95, 0));
+        //addParam(createParam<AutodafeKnob>(Vec(25, 111), module, PhaserFx::PARAM_FEEDBACK, 0, 0.95, 0));
 
-	addParam(createParam<AutodafeKnobGreen>(Vec(25, 171), module, PhaserFx::PARAM_DEPTH, 0, 1, 0));
-    //addParam(createParam<AutodafeKnob>(Vec(25, 171), module, PhaserFx::PARAM_DEPTH, 0, 1, 0));
+    	addParam(createParam<AutodafeKnobGreen>(Vec(25, 171), module, PhaserFx::PARAM_DEPTH, 0, 1, 0));
+        //addParam(createParam<AutodafeKnob>(Vec(25, 171), module, PhaserFx::PARAM_DEPTH, 0, 1, 0));
 
-	addInput(createInput<PJ301MPort>(Vec(10, 320), module, PhaserFx::INPUT));
-	addOutput(createOutput<PJ301MPort>(Vec(48, 320), module, PhaserFx::OUT));
- 
-}
+    	addInput(createInput<PJ301MPort>(Vec(10, 320), module, PhaserFx::INPUT));
+    	addOutput(createOutput<PJ301MPort>(Vec(48, 320), module, PhaserFx::OUT));
+    }
 };
 
-Model *modelPhaser = Model::create<PhaserFx, PhaserFxWidget>("Autodafe",  "Phaser", "Phaser", EFFECT_TAG);
+Model *modelPhaser = Model::create<PhaserFx, PhaserFxWidget>("Autodafe",  "Phaser", "Phaser", PHASER_TAG, EFFECT_TAG);

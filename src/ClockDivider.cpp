@@ -7,7 +7,7 @@
 
 #include "Autodafe.hpp"
 #include "dsp/digital.hpp"
-struct ClockDivider : Module {
+struct ClockDividerModule : Module {
 	enum ParamIds {
 		RESET_PARAM,
 		NUM_PARAMS
@@ -64,7 +64,7 @@ enum LightIds {
 
 	}
 
-	ClockDivider() ; 
+	ClockDividerModule() ; 
 	void step() ;
 };
 
@@ -74,7 +74,7 @@ enum LightIds {
 
 
 
-ClockDivider::ClockDivider() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_LIGHTS) {
+ClockDividerModule::ClockDividerModule() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_LIGHTS) {
 	params.resize(NUM_PARAMS);
 	inputs.resize(NUM_INPUTS);
 	outputs.resize(NUM_OUTPUTS);
@@ -97,7 +97,7 @@ int divider4 = 4;
 int divider8 = 8;
 int divider16 = 16;
 int divider32 = 32;
-void ClockDivider::step() {
+void ClockDividerModule::step() {
 
 	bool reset = false;
 
@@ -317,31 +317,31 @@ if (blinkPhase >= 1.0)
 
 struct ClockDividerWidget : ModuleWidget
 {
-	ClockDividerWidget(ClockDivider *module) : ModuleWidget(module) {
+	ClockDividerWidget(ClockDividerModule *module) : ModuleWidget(module) {
 	setPanel(SVG::load(assetPlugin(plugin, "res/ClockDivider.svg")));
 
 	addChild(createScrew<ScrewSilver>(Vec(1, 0)));
 	addChild(createScrew<ScrewSilver>(Vec(1, 365)));
 
-	addInput(createInput<PJ3410Port>(Vec(2, 20), module, ClockDivider::CLOCK_INPUT));
-	addInput(createInput<PJ3410Port>(Vec(2, 60), module, ClockDivider::RESET_INPUT));
-	addParam(createParam<LEDButton>(Vec(38, 67), module, ClockDivider::RESET_PARAM, 0.0, 1.0, 0.0));
+	addInput(createInput<PJ3410Port>(Vec(2, 20), module, ClockDividerModule::CLOCK_INPUT));
+	addInput(createInput<PJ3410Port>(Vec(2, 60), module, ClockDividerModule::RESET_INPUT));
+	addParam(createParam<LEDButton>(Vec(38, 67), module, ClockDividerModule::RESET_PARAM, 0.0, 1.0, 0.0));
 	 
-	addOutput(createOutput<PJ3410Port>(Vec(2, 120), module, ClockDivider::OUT2));
-	addOutput(createOutput<PJ3410Port>(Vec(2, 160), module, ClockDivider::OUT4));
-	addOutput(createOutput<PJ3410Port>(Vec(2, 200), module, ClockDivider::OUT8));
-	addOutput(createOutput<PJ3410Port>(Vec(2, 240), module, ClockDivider::OUT16));
-	addOutput(createOutput<PJ3410Port>(Vec(2, 280), module, ClockDivider::OUT32));
+	addOutput(createOutput<PJ3410Port>(Vec(2, 120), module, ClockDividerModule::OUT2));
+	addOutput(createOutput<PJ3410Port>(Vec(2, 160), module, ClockDividerModule::OUT4));
+	addOutput(createOutput<PJ3410Port>(Vec(2, 200), module, ClockDividerModule::OUT8));
+	addOutput(createOutput<PJ3410Port>(Vec(2, 240), module, ClockDividerModule::OUT16));
+	addOutput(createOutput<PJ3410Port>(Vec(2, 280), module, ClockDividerModule::OUT32));
 
 
 
-	addChild(createLight<SmallLight<RedLight>>(Vec(38, 125), module, ClockDivider::LIGHT1));
-	addChild(createLight<SmallLight<RedLight>>(Vec(38, 165), module, ClockDivider::LIGHT2));
-	addChild(createLight<SmallLight<RedLight>>(Vec(38, 205), module, ClockDivider::LIGHT3));
-	addChild(createLight<SmallLight<RedLight>>(Vec(38, 245), module, ClockDivider::LIGHT4));
-	addChild(createLight<SmallLight<RedLight>>(Vec(38, 285), module, ClockDivider::LIGHT5));
+	addChild(createLight<SmallLight<RedLight>>(Vec(38, 125), module, ClockDividerModule::LIGHT1));
+	addChild(createLight<SmallLight<RedLight>>(Vec(38, 165), module, ClockDividerModule::LIGHT2));
+	addChild(createLight<SmallLight<RedLight>>(Vec(38, 205), module, ClockDividerModule::LIGHT3));
+	addChild(createLight<SmallLight<RedLight>>(Vec(38, 245), module, ClockDividerModule::LIGHT4));
+	addChild(createLight<SmallLight<RedLight>>(Vec(38, 285), module, ClockDividerModule::LIGHT5));
 
 }
 };
 
-Model *modelClockDivider = Model::create<ClockDivider, ClockDividerWidget>("Autodafe",  "Clock Divider", "Clock Divider", UTILITY_TAG);
+Model *modelClockDivider = Model::create<ClockDividerModule, ClockDividerWidget>("Autodafe",  "Clock Divider", "Clock Divider", UTILITY_TAG, CLOCK_MODULATOR_TAG);
